@@ -1,11 +1,8 @@
-#!/usr/bin/env ruby
-# encoding: UTF-8
-
 require 'benchmark'
 n = 1000000
 
 foo = nil
-Benchmark.bm(7, ">rase:", ">if:") do |x|
+Benchmark.bm(7, ">raise:", ">if:") do |x|
   a = x.report("raise") {  n.times{ begin; foo.foo; rescue; end } }
   b = x.report("if") {  n.times{ if foo.nil?; end } }
 end
