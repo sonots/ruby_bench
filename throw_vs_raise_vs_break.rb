@@ -2,7 +2,7 @@ require 'benchmark'
 n = 1000000
 
 foo = nil
-Benchmark.bm(7, ">throw", ">raise:", ">if:") do |x|
+Benchmark.bm(7, ">throw", ">raise:", ">break:") do |x|
   a = x.report("throw") { n.times {
     catch(:foo) do
       while true
@@ -22,7 +22,7 @@ Benchmark.bm(7, ">throw", ">raise:", ">if:") do |x|
     rescue
     end
   }}
-  c = x.report("if") { n.times {
+  c = x.report("break") { n.times {
     is_break = false
     while true
       while true
@@ -33,6 +33,6 @@ Benchmark.bm(7, ">throw", ">raise:", ">if:") do |x|
   }}
 end
 #              user     system      total        real
-#throw     0.610000   0.000000   0.610000 (  0.609155)
-#raise     4.910000   0.050000   4.960000 (  5.118787)
-#if        0.180000   0.010000   0.190000 (  0.182652)
+#throw     0.660000   0.000000   0.660000 (  0.664681)
+#raise     4.250000   0.070000   4.320000 (  4.468123)
+#break     0.380000   0.000000   0.380000 (  0.393236)
