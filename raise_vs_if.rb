@@ -1,11 +1,13 @@
-require 'benchmark'
-n = 1000000
+require 'benchmark/ips'
 
 foo = nil
-Benchmark.bm(7, ">raise:", ">if:") do |x|
-  a = x.report("raise") {  n.times{ begin; foo.foo; rescue; end } }
-  b = x.report("if") {  n.times{ if foo.nil?; end } }
+Benchmark.ips do |x|
+  x.report("raise") {  begin; foo.foo; rescue; end }
+  x.report("if") {  if foo.nil?; end }
 end
-#              user     system      total        real
-#raise     5.210000   0.010000   5.220000 (  5.302661)
-#if        0.120000   0.000000   0.120000 (  0.117799)
+#Calculating -------------------------------------
+#               raise     14852 i/100ms
+#                  if     72725 i/100ms
+#-------------------------------------------------
+#               raise   187487.1 (±6.1%) i/s -     935676 in   5.013734s
+#                  if  4547458.2 (±5.2%) i/s -   22690200 in   5.006327s
