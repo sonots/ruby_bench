@@ -5,6 +5,7 @@ Benchmark.ips do |x|
   x.report("raise") {  begin; foo.foo; rescue; end }
   x.report("if") {  if foo.nil?; end }
 end
+#raise is stupidly slow!
 #Calculating -------------------------------------
 #               raise     14852 i/100ms
 #                  if     72725 i/100ms
