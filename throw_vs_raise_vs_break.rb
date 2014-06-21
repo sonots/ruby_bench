@@ -32,6 +32,7 @@ Benchmark.bm(7, ">throw", ">raise:", ">break:") do |x|
     end
   }}
 end
+#raise is stupidly slow. `break if` is the fastest, but throw looks good to use. 
 #              user     system      total        real
 #throw     0.660000   0.000000   0.660000 (  0.664681)
 #raise     4.250000   0.070000   4.320000 (  4.468123)
