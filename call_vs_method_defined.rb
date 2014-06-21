@@ -7,7 +7,7 @@ Benchmark.ips do |x|
   x.report("call") {  foo }
   x.report("method_defined") {  bar if self.class.method_defined?(:bar) }
 end
-# call wins a bit
+# call wins
 #Calculating -------------------------------------
 #                call     65835 i/100ms
 #      method_defined     66534 i/100ms
