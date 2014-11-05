@@ -1,7 +1,8 @@
 require 'benchmark/ips'
 
-text_sprintf = "a"*500 + "%s" + "a"*500 + "%s"
-text = "a"*500 + "{{foo}}" + "a"*500 + "{{bar}}"
+a500 = "a"*500
+text_sprintf = "#{a500}%s#{a500}%s"
+text = "#{a500}{{foo}}#{a500}{{bar}}"
 hash = { '{{foo}}' => 'foo', '{{bar}}' => 'bar' }
 
 def index_replace(template, replace = {})
@@ -22,6 +23,7 @@ Benchmark.ips do |x|
   x.report("sub twice")      { text.sub('{{foo}}', "foo").sub!('{{bar}}', 'bar') }
   # x.report("sub hash")       { text.sub(/{{foo}}|{{bar}}/, hash) } # this does not change {{bar}}
   x.report("index")          { index_replace(text, hash) }
+  x.report("string")         { "#{a500}foo#{a500}bar" }
 end
 
 # Calculating -------------------------------------
